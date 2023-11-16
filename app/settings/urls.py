@@ -6,5 +6,6 @@ from currency.views import rate_list, message_list
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('rate/list', rate_list),
-    path('message/list', rate_list),
+    path('message/list', message_list),
+
 ]

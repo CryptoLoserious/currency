@@ -14,7 +14,6 @@ def rate_list(request):
     return HttpResponse(str(results))
 
 def message_list(request):
-
     results2 = []
     contacts = ContactUs.objects.all()
 

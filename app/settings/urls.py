@@ -7,5 +7,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('rate/list', rate_list),
     path('message/list', message_list),
-
 ]

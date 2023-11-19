@@ -1,5 +1,5 @@
 # from django.shortcuts import render
-from django.http.response import HttpResponse
+# from django.http.response import HttpResponse
 from django.shortcuts import render
 from currency.models import Rate, ContactUs
 
@@ -22,5 +22,3 @@ def message_list(request):
     }
 
     return render(request, 'contactUs.html', context2)
-
-

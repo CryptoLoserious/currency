@@ -9,8 +9,10 @@ from django.views.decorators.csrf import csrf_exempt
 def rate_list(request):
 
     rates = Rate.objects.all()
+    sources = Source.objects.all()
     context = {
-        'rates': rates
+        'rates': rates,
+        'sources': sources,
     }
 
     return render(request, 'rate_list.html', context)
@@ -28,9 +30,9 @@ def message_list(request):
 
 def source_list(request):
 
-    source = Source.objects.all()
+    sources = Source.objects.all()
     context3 = {
-        'source': source
+        'sources': sources
     }
 
     return render(request, 'source_list.html', context3)
@@ -39,7 +41,6 @@ def source_list(request):
 def source_create(request):
     if request.method == 'POST':
         form = SourceForm(data=request.POST)
-        # print(request.GET)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/source/list/')
@@ -132,7 +133,6 @@ def contactUs_update(request, pk):
 def source_update(request, pk):
     source = get_object_or_404(Source, id=pk)
 
-
     if request.method == 'POST':
         form = RateForm(data=request.POST, instance=source)
 
@@ -165,40 +165,40 @@ def rate_delete(request, pk):
 
 
 def contactUs_delete(request, pk):
-    contacts = get_object_or_404(ContactUs, id=pk)
+    contact = get_object_or_404(ContactUs, id=pk)
 
     if request.method == 'GET':
         context = {
-            'contacts': contacts
+            'contact': contact
         }
         return render(request, 'contactUs_delete.html', context)
 
     elif request.method == 'POST':
-        contacts.delete()
+        contact.delete()
         return HttpResponseRedirect('/message/list/')
 
 
 def source_delete(request, pk):
-    sources = get_object_or_404(Source, id=pk)
+    source = get_object_or_404(Source, id=pk)
 
     if request.method == 'GET':
         context = {
-            'sources': sources
+            'source': source
         }
         return render(request, 'source_delete.html', context)
 
     elif request.method == 'POST':
-        sources.delete()
+        source.delete()
         return HttpResponseRedirect('/source/list/')
 
+
 def source_details(request, pk):
-    sources = get_object_or_404(Source, id=pk)
+    source = get_object_or_404(Source, id=pk)
 
     context = {
-        'sources': sources
+        'source': source
     }
     return render(request, 'source_details.html', context)
-
 
 
 @csrf_exempt

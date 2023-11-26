@@ -27,8 +27,8 @@
     <td>{{ rate.currency_type }}</td>
     <td>
       {% for source in sources %}
-        {% if source.id == rete.id %}
-          {{ source.name }}
+        {% if source.id == rate.id %}
+          <a href="/source/details/{{ source.id }}/">{{ source.name }}</a>
         {% endif %}
       {% endfor %}
     </td>

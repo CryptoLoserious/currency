@@ -2,26 +2,20 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Source List
+
+Source details of id {{ source.id }}
+
 {% endblock title %}
 
 {% block content %}
 
-<p>
-    <a href="/source/create/">Create</a>
-</p>
+    <b>ID: </b> {{ source.id }},
+    <b>Name: </b> {{ source.name }},
+    <b>Source_url: </b> {{ source.source_url }}
+    <b>Created: </b> {{ source.created }}
 
-<table>
-  <tr>
-    <th>Source_url:</th>
-    <th>Name:</th>
-  </tr>
-  {% for source in sources %}
-  <tr>
-    <td>{{ source.id }}</td>
-    <td>{{ source.source_url }}</td>
-  </tr>
-  {% endfor %}
-</table>
+<p>
+<b><a href="/rate/list/">Rates</a></b>
+</p>
 
 {% endblock content %}

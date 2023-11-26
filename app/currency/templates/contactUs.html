@@ -6,6 +6,10 @@
 
 {% block content %}
 
+<p>
+    <a href="/contact/create/">Create</a>
+</p>
+
 <table>
   <tr>
     <th>id:</th>
@@ -19,6 +23,8 @@
     <td>{{ contact.email_from }}</td>
     <td>{{ contact.subject }}</td>
     <td>{{ contact.message }}</td>
+    <td><a href="/contact/update/{{ contact.id }}/">Edit</a></td>
+    <td><a href="/contact/delete/{{ contact.id }}/">Delete</a></td>
   </tr>
   {% endfor %}
 </table>

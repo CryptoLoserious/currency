@@ -7,12 +7,17 @@
 
 {% block content %}
 
+<p>
+    <a href="/rate/create/">Create</a>
+</p>
+
 <table>
   <tr>
     <th>id:</th>
     <th>Buy:</th>
     <th>Sell:</th>
     <th>Type:</th>
+    <th>Source:</th>
   </tr>
   {% for rate in rates %}
   <tr>
@@ -20,6 +25,15 @@
     <td>{{ rate.buy }}</td>
     <td>{{ rate.sell }}</td>
     <td>{{ rate.currency_type }}</td>
+    <td>
+      {% for source in sources %}
+        {% if source.id == rete.id %}
+          {{ source.name }}
+        {% endif %}
+      {% endfor %}
+    </td>
+    <td><a href="/rate/update/{{ rate.id }}/">Edit</a></td>
+    <td><a href="/rate/delete/{{ rate.id }}/">Delete</a></td>
   </tr>
   {% endfor %}
 </table>

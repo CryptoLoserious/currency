@@ -17,7 +17,6 @@
     <th>Buy:</th>
     <th>Sell:</th>
     <th>Type:</th>
-    <th>Source:</th>
   </tr>
   {% for rate in rates %}
   <tr>
@@ -25,15 +24,9 @@
     <td>{{ rate.buy }}</td>
     <td>{{ rate.sell }}</td>
     <td>{{ rate.currency_type }}</td>
-    <td>
-      {% for source in sources %}
-        {% if source.id == rate.id %}
-          <a href="/source/details/{{ source.id }}/">{{ source.name }}</a>
-        {% endif %}
-      {% endfor %}
-    </td>
     <td><a href="/rate/update/{{ rate.id }}/">Edit</a></td>
     <td><a href="/rate/delete/{{ rate.id }}/">Delete</a></td>
+    <td><a href="/source/details/{{ rate.id }}/">Details</a></td>
   </tr>
   {% endfor %}
 </table>

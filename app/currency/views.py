@@ -134,7 +134,7 @@ def source_update(request, pk):
     source = get_object_or_404(Source, id=pk)
 
     if request.method == 'POST':
-        form = RateForm(data=request.POST, instance=source)
+        form = SourceForm(data=request.POST, instance=source)
 
         if form.is_valid():
             form.save()

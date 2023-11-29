@@ -7,7 +7,7 @@
 {% block content %}
 
 <p>
-    <a href="/contact/create/">Create</a>
+    <a href="{% url 'currency:contact-create' %}">Create</a>
 </p>
 
 <table>
@@ -17,14 +17,14 @@
     <th>Subject:</th>
     <th>Message:</th>
   </tr>
-  {% for contact in contacts %}
+  {% for contact in object_list %}
   <tr>
     <td>{{ contact.id }}</td>
     <td>{{ contact.email_from }}</td>
     <td>{{ contact.subject }}</td>
     <td>{{ contact.message }}</td>
-    <td><a href="/contact/update/{{ contact.id }}/">Edit</a></td>
-    <td><a href="/contact/delete/{{ contact.id }}/">Delete</a></td>
+    <td><a href="{% url 'currency:contact-update' contact.id %}">Edit</a></td>
+    <td><a href="{% url 'currency:contact-delete' contact.id %}">Delete</a></td>
   </tr>
   {% endfor %}
 </table>

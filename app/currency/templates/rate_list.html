@@ -7,6 +7,10 @@
 
 {% block content %}
 
+<p>
+    <a href="/rate/create/">Create</a>
+</p>
+
 <table>
   <tr>
     <th>id:</th>
@@ -20,6 +24,9 @@
     <td>{{ rate.buy }}</td>
     <td>{{ rate.sell }}</td>
     <td>{{ rate.currency_type }}</td>
+    <td><a href="/rate/update/{{ rate.id }}/">Edit</a></td>
+    <td><a href="/rate/delete/{{ rate.id }}/">Delete</a></td>
+    <td><a href="/source/details/{{ rate.id }}/">Details</a></td>
   </tr>
   {% endfor %}
 </table>

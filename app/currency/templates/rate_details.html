@@ -1,0 +1,20 @@
+
+<{% extends 'base.html' %}
+
+{% block title %}
+    Rate Details
+{% endblock title %}
+
+{% block content %}
+
+    <b>ID: </b> {{ rate.id }},
+    <b>Name: </b> {{ rate.currency_type }},
+    <b>BUY: </b> {{ rate.buy }}
+    <b>SELL: </b> {{ rate.sell }}
+    <b>Created: </b> {{ rate.created }}
+
+<p>
+    <b><a href="{% url 'currency:rate-list' %}">Ok</a></b>
+</p>
+
+{% endblock content %}

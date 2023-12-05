@@ -11,6 +11,7 @@ class RateForm(forms.ModelForm):
             'buy',
             'sell',
             'currency_type',
+            'source'
         )
 
 

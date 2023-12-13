@@ -46,7 +46,7 @@ class ContactUsAdmin(admin.ModelAdmin):
         'id',
         'email_from',
         'subject',
-        'message'
+        'body'
     )
     list_filter = (
         'email_from',
@@ -55,7 +55,7 @@ class ContactUsAdmin(admin.ModelAdmin):
     search_fields = (
         'id',
         'subject',
-        'message'
+        'body'
     )
 
     def has_delete_permission(self, request, obj=None):

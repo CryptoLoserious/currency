@@ -31,5 +31,5 @@ class ContactUsForm(forms.ModelForm):
         fields = (
             'email_from',
             'subject',
-            'message',
+            'body',
         )

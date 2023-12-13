@@ -1,4 +1,7 @@
+from time import time
+
 from currency.models import Rate, ContactUs, Source
+from django.core.mail import send_mail
 from django.urls import reverse_lazy
 from currency.forms import RateForm, SourceForm, ContactUsForm
 from django.views.generic import (
@@ -30,9 +33,51 @@ class RateCreateView(CreateView):
 
 
 class ContactUsCreateView(CreateView):
-    form_class = SourceForm
-    success_url = reverse_lazy('currency:message-list')
+    model = ContactUs
     template_name = 'contactUs_create.html'
+    success_url = reverse_lazy('index')
+    fields = (
+        'name',
+        'email_from',
+        'subject',
+        'body'
+    )
+
+    def dispatch(self, request, *args, **kwargs):
+        start = time()
+
+        response = super().dispatch(request, *args, **kwargs)
+
+        end = time()
+
+        print(f'After view: {end - start}')
+        return response
+
+    def _send_email(self):
+        from django.conf import settings
+        recipient = settings.DEFAULT_FROM_EMAIL
+        subject = 'User contact us'
+        body = f'''
+            Name: {self.object.name}
+            Email: {self.object.email_from}
+            Subject: {self.object.subject}
+            Body: {self.object.body}
+            '''
+
+        send_mail(
+            subject,
+            body,
+            recipient,
+            [recipient],
+            fail_silently=False,
+        )
+
+    def form_valid(self, form):
+        redirect = super().form_valid(form)
+
+        self._send_email()
+
+        return redirect
 
 
 class SourceCreateView(CreateView):

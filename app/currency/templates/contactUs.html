@@ -22,7 +22,7 @@
     <td>{{ contact.id }}</td>
     <td>{{ contact.email_from }}</td>
     <td>{{ contact.subject }}</td>
-    <td>{{ contact.message }}</td>
+    <td>{{ contact.body }}</td>
     <td><a href="{% url 'currency:contact-update' contact.id %}">Edit</a></td>
     <td><a href="{% url 'currency:contact-delete' contact.id %}">Delete</a></td>
   </tr>

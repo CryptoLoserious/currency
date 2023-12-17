@@ -1,5 +1,8 @@
-from time import time
+# from time import time
 
+# from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import get_user_model
 from currency.models import Rate, ContactUs, Source
 from django.core.mail import send_mail
 from django.urls import reverse_lazy
@@ -11,7 +14,7 @@ from django.views.generic import (
 )
 
 
-class RateListView(ListView):
+class RateListView(LoginRequiredMixin, ListView):
     queryset = Rate.objects.all()
     template_name = 'rate_list.html'
 
@@ -43,15 +46,15 @@ class ContactUsCreateView(CreateView):
         'body'
     )
 
-    def dispatch(self, request, *args, **kwargs):
-        start = time()
-
-        response = super().dispatch(request, *args, **kwargs)
-
-        end = time()
-
-        print(f'After view: {end - start}')
-        return response
+    # def dispatch(self, request, *args, **kwargs):
+    #     start = time()
+    #
+    #     response = super().dispatch(request, *args, **kwargs)
+    #
+    #     end = time()
+    #
+    #     # print(f'After view: {end - start}')
+    #     return response
 
     def _send_email(self):
         from django.conf import settings
@@ -132,3 +135,20 @@ class RateDetailView(DetailView):
 
 class IndexView(TemplateView):
     template_name = 'index.html'
+
+
+class ProfileView(LoginRequiredMixin, UpdateView):
+    # model = User   -   WRONG way
+    model = get_user_model()
+    template_name = 'profile.html'
+    success_url = reverse_lazy('index')
+    fields = (
+        'first_name',
+        'last_name'
+    )
+
+
+def get_object(self, queryset=None):
+    qs = self.get_queryset()
+
+    return qs.get(id=self.request.user.id)

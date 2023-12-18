@@ -1,7 +1,7 @@
 # from time import time
 
 # from django.contrib.auth.models import User
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.contrib.auth import get_user_model
 from currency.models import Rate, ContactUs, Source
 from django.core.mail import send_mail
@@ -14,9 +14,12 @@ from django.views.generic import (
 )
 
 
-class RateListView(LoginRequiredMixin, ListView):
+class RateListView(UserPassesTestMixin, ListView):
     queryset = Rate.objects.all()
     template_name = 'rate_list.html'
+
+    def test_func(self):
+        return self.request.user.is_superuser
 
 
 class ContactUsListView(ListView):
@@ -29,10 +32,13 @@ class SourceListView(ListView):
     template_name = 'source_list.html'
 
 
-class RateCreateView(CreateView):
+class RateCreateView(UserPassesTestMixin, CreateView):
     form_class = RateForm
     success_url = reverse_lazy('currency:rate-list')
     template_name = 'rate_create.html'
+
+    def test_func(self):
+        return self.request.user.is_superuser
 
 
 class ContactUsCreateView(CreateView):
@@ -135,20 +141,3 @@ class RateDetailView(DetailView):
 
 class IndexView(TemplateView):
     template_name = 'index.html'
-
-
-class ProfileView(LoginRequiredMixin, UpdateView):
-    # model = User   -   WRONG way
-    model = get_user_model()
-    template_name = 'profile.html'
-    success_url = reverse_lazy('index')
-    fields = (
-        'first_name',
-        'last_name'
-    )
-
-
-def get_object(self, queryset=None):
-    qs = self.get_queryset()
-
-    return qs.get(id=self.request.user.id)

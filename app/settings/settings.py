@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'import_export',
 
     'currency',
+    'account'
 ]
 
 MIDDLEWARE = [
@@ -115,6 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'account.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -145,7 +147,7 @@ DEFAULT_FROM_EMAIL = 'wisp777test@gmail.com'
 # EMAIL_USE_SSL = False
 # EMAIL_PORT = 587  # http - 80, https - 443
 # EMAIL_HOST_USER = 'wisp777test@gmail.com'
-# EMAIL_HOST_PASSWORD = '**********'
+# EMAIL_HOST_PASSWORD = '***********'
 
 
 # from django.core.mail import send_mail

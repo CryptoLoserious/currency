@@ -13,7 +13,7 @@ class RequestResponseLogTimeItMiddleware:
         response = self.get_response(request)
 
         end = time()
-        print(f'After in middleware {end - start}')
+        # print(f'After in middleware {end - start}')
 
         RequestResponseLog.objects.create(
             path=request.path,

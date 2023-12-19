@@ -163,3 +163,6 @@ DEFAULT_FROM_EMAIL = 'wisp777test@gmail.com'
 LOGIN_REDIRECT_URL = reverse_lazy('index')
 LOGIN_URL = reverse_lazy('login')
 LOGOUT_REDIRECT_URL = reverse_lazy('login')
+
+HTTP_METHOD = 'http'
+DOMAIN = '0.0.0.0:8000'

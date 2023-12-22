@@ -8,7 +8,9 @@
 {% block content %}
 
 <p>
+{% if request.user.is_superuser %}
     <a href="{% url 'currency:rate-create' %}">Create</a>
+{% endif %}
 </p>
 
 <table>
@@ -24,9 +26,13 @@
     <td>{{ rate.buy }}</td>
     <td>{{ rate.sell }}</td>
     <td>{{ rate.get_currency_type_display }}</td>
-    <td><a href="{% url 'currency:rate-update' rate.id %}">Edit</a></td>
-    <td><a href="{% url 'currency:rate-delete' rate.id %}">Delete</a></td>
-    <td><a href="{% url 'currency:rate-details' rate.id %}">Details</a></td>
+    {% if request.user.is_superuser %}
+        <td><a href="{% url 'currency:rate-update' rate.id %}">Edit</a></td>
+        <td><a href="{% url 'currency:rate-delete' rate.id %}">Delete</a></td>
+        <td><a href="{% url 'currency:rate-details' rate.id %}">Details</a></td>
+    {% elif request.user.is_authenticated %}
+        <td><a href="{% url 'currency:rate-details' rate.id %}">Details</a></td>
+    {% endif %}
   </tr>
   {% endfor %}
 </table>

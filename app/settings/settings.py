@@ -165,4 +165,4 @@ LOGIN_URL = reverse_lazy('login')
 LOGOUT_REDIRECT_URL = reverse_lazy('login')
 
 HTTP_METHOD = 'http'
-DOMAIN = '0.0.0.0:8000'
+DOMAIN = '127.0.0.1:8000'

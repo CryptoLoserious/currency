@@ -1,5 +1,5 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import UpdateView, CreateView, RedirectView
 from django.urls import reverse_lazy
 
@@ -17,11 +17,10 @@ class ProfileView(LoginRequiredMixin, UpdateView):
         'last_name'
     )
 
+    def get_object(self, queryset=None):
+        qs = self.get_queryset()
 
-def get_object(self, queryset=None):
-    qs = self.get_queryset()
-
-    return qs.get(id=self.request.user.id)
+        return qs.get(id=self.request.user.id)
 
 
 class UserSignUpView(CreateView):

@@ -2,6 +2,7 @@ from django.db import models
 
 from currency.choices import CurrencyTypeChoices
 from django.utils.translation import gettext_lazy as _
+from django.templatetags.static import static
 
 
 class Rate(models.Model):
@@ -13,20 +14,33 @@ class Rate(models.Model):
         choices=CurrencyTypeChoices.choices,
         default=CurrencyTypeChoices.USD
     )
-    source = models.ForeignKey('currency.Source', on_delete=models.CASCADE)  # TODO related_name
+    source = models.ForeignKey('currency.Source', on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.buy} - {self.sell} - {self.source}'
+
+
+def logo_directory_path(instance, filename):
+    # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
+    return f'logo/source_{instance.id}/{filename}'
 
 
 class Source(models.Model):
     source_url = models.CharField(_('URL'), max_length=255)
     name = models.CharField(_('Name'), max_length=64)
     created = models.DateTimeField(_('Created'), auto_now_add=True)
+    logo = models.FileField(_('Logo'), default=None, null=True, blank=True, upload_to=logo_directory_path)
 
     class Meta:
         verbose_name = _('Source')
         verbose_name_plural = _('Sources')
+
+    @property
+    def logo_url(self) -> str:
+        if self.logo:
+            return self.logo.url
+
+        return static('default_logo.webp')
 
     def __str__(self):
         return self.name

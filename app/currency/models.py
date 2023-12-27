@@ -13,7 +13,7 @@ class Rate(models.Model):
         choices=CurrencyTypeChoices.choices,
         default=CurrencyTypeChoices.USD
     )
-    source = models.CharField(_('Source'), max_length=255)
+    source = models.ForeignKey('currency.Source', on_delete=models.CASCADE)  # TODO related_name
 
     def __str__(self):
         return f'{self.buy} - {self.sell} - {self.source}'
@@ -23,6 +23,13 @@ class Source(models.Model):
     source_url = models.CharField(_('URL'), max_length=255)
     name = models.CharField(_('Name'), max_length=64)
     created = models.DateTimeField(_('Created'), auto_now_add=True)
+
+    class Meta:
+        verbose_name = _('Source')
+        verbose_name_plural = _('Sources')
+
+    def __str__(self):
+        return self.name
 
 
 class ContactUs(models.Model):

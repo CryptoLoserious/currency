@@ -15,11 +15,11 @@ from django.views.generic import (
 
 
 class RateListView(UserPassesTestMixin, ListView):
-    queryset = Rate.objects.all()
+    queryset = Rate.objects.all().select_related('source')
     template_name = 'rate_list.html'
 
     def test_func(self):
-        return self.request.user.is_superuser
+        return self.request.user.is_active
 
 
 class ContactUsListView(ListView):

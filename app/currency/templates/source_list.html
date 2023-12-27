@@ -11,21 +11,38 @@
     <a href="{% url 'currency:source-create' %}">Create</a>
 </p>
 
-<table>
-  <tr>
-    <th>ID:</th>
-    <th>Source_url:</th>
-    <th>Name:</th>
-  </tr>
-  {% for source in source_list %}
-  <tr>
-    <td>{{ source.id }}</td>
-    <td>{{ source.source_url }}</td>
-    <td>{{ source.name }}</td>
-    <td><a href="{% url 'currency:source-update' source.id %}">Edit</a></td>
-    <td><a href="{% url 'currency:source-delete' source.id %}">Delete</a></td>
-  </tr>
-  {% endfor %}
-</table>
-
+<div class="row">
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">id:</th>
+            <th scope="col">Name:</th>
+            <th scope="col">Source_url:</th>
+            <th scope="col">Details:</th>
+          </tr>
+        </thead>
+        <tbody>
+              {% for source in source_list %}
+              <tr>
+                <th scope="row">{{ source.id }}</th>
+                <td>{{ source.name }}</td>
+                <td>{{ source.source_url }}</td>
+                <td>
+                  <div class="dropdown">
+                      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Actions
+                      </a>
+                      <div class="dropdown-menu">
+                        {% if request.user.is_superuser %}
+                            <a class="dropdown-item" href="{% url 'currency:source-update' source.id %}">Edit</a>
+                            <a class="dropdown-item" href="{% url 'currency:source-delete' source.id %}">Delete</a>
+                        {% endif %}
+                      </div>
+                  </div>
+                </td>
+              </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock content %}

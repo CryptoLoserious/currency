@@ -10,23 +10,41 @@
     <a href="{% url 'currency:contact-create' %}">Create</a>
 </p>
 
-<table>
-  <tr>
-    <th>id:</th>
-    <th>Email from:</th>
-    <th>Subject:</th>
-    <th>Message:</th>
-  </tr>
-  {% for contact in object_list %}
-  <tr>
-    <td>{{ contact.id }}</td>
-    <td>{{ contact.email_from }}</td>
-    <td>{{ contact.subject }}</td>
-    <td>{{ contact.body }}</td>
-    <td><a href="{% url 'currency:contact-update' contact.id %}">Edit</a></td>
-    <td><a href="{% url 'currency:contact-delete' contact.id %}">Delete</a></td>
-  </tr>
-  {% endfor %}
-</table>
+<div class="row">
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">id:</th>
+            <th scope="col">Email from:</th>
+            <th scope="col">Subject:</th>
+            <th scope="col">Message:</th>
+            <th scope="col">Details:</th>
+          </tr>
+        </thead>
+        <tbody>
+              {% for contact in object_list %}
+              <tr>
+                <th scope="row">{{ contact.id }}</th>
+                <td>{{ contact.email_from }}</td>
+                <td>{{ contact.subject }}</td>
+                <td>{{ contact.body }}</td>
+                <td>
+                  <div class="dropdown">
+                      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Actions
+                      </a>
+                      <div class="dropdown-menu">
+                        {% if request.user.is_superuser %}
+                            <a class="dropdown-item" href="{% url 'currency:contact-update' contact.id %}">Edit</a>
+                            <a class="dropdown-item" href="{% url 'currency:contact-delete' contact.id %}">Delete</a>
+                        {% endif %}
+                      </div>
+                  </div>
+                </td>
+              </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 {% endblock content %}

@@ -13,30 +13,46 @@
 {% endif %}
 </p>
 
-<table>
-  <tr>
-    <th>id:</th>
-    <th>Buy:</th>
-    <th>Sell:</th>
-    <th>Type:</th>
-    <th>Source:</th>
-  </tr>
-  {% for rate in rate_list %}
-  <tr>
-    <td>{{ rate.id }}</td>
-    <td>{{ rate.buy }}</td>
-    <td>{{ rate.sell }}</td>
-    <td>{{ rate.get_currency_type_display }}</td>
-    <td>{{ rate.source }}</td>
-    {% if request.user.is_superuser %}
-        <td><a href="{% url 'currency:rate-update' rate.id %}">Edit</a></td>
-        <td><a href="{% url 'currency:rate-delete' rate.id %}">Delete</a></td>
-        <td><a href="{% url 'currency:rate-details' rate.id %}">Details</a></td>
-    {% elif request.user.is_authenticated %}
-        <td><a href="{% url 'currency:rate-details' rate.id %}">Details</a></td>
-    {% endif %}
-  </tr>
-  {% endfor %}
-</table>
+<div class="row">
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">id:</th>
+            <th scope="col">Buy:</th>
+            <th scope="col">Sell:</th>
+            <th scope="col">Type:</th>
+            <th scope="col">Source:</th>
+            <th scope="col">Details:</th>
+          </tr>
+        </thead>
+        <tbody>
+              {% for rate in rate_list %}
+              <tr>
+                <th scope="row">{{ rate.id }}</th>
+                <td>{{ rate.buy }}</td>
+                <td>{{ rate.sell }}</td>
+                <td>{{ rate.get_currency_type_display }}</td>
+                <td>{{ rate.source }}</td>
+                <td>
+                  <div class="dropdown">
+                      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Actions
+                      </a>
+                      <div class="dropdown-menu">
+                        {% if request.user.is_superuser %}
+                            <a class="dropdown-item" href="{% url 'currency:rate-update' rate.id %}">Edit</a>
+                            <a class="dropdown-item" href="{% url 'currency:rate-delete' rate.id %}">Delete</a>
+                            <a class="dropdown-item" href="{% url 'currency:rate-details' rate.id %}">Details</a>
+                        {% elif request.user.is_authenticated %}
+                            <a class="dropdown-item" href="{% url 'currency:rate-details' rate.id %}">Details</a>
+                        {% endif %}
+                      </div>
+                  </div>
+                </td>
+              </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 {% endblock content %}

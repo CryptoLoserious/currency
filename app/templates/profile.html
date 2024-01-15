@@ -1,12 +1,21 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %} Profile {% endblock %}
+{% block title %}Profile{% endblock %}
 
 {% block content %}
 
     <h1>Profile</h1>
+    
+{#    {% if user.avatar %}#}
+{#        <img style="height: 200px; width: 330px" src="{{ user.avatar.url }}" alt="avatar">#}
+{#    {% else %}#}
+{#        <img style="height: 200px; width: 200px" src="{% static 'default_icon.webp' %}" alt="avatar">#}
+{#    {% endif %} #}
 
-    <form method="post">
+    <img style="height: 200px; width: 300px" src="{{ user.avatar_url }}" alt="avatar">
+
+    <form method="post" enctype="multipart/form-data">
 
     {% csrf_token %}
     {{ form.as_p }}

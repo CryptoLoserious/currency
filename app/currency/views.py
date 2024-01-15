@@ -1,11 +1,11 @@
 # from time import time
-from datetime import datetime, timedelta
+# from datetime import datetime, timedelta
 
 # from django.contrib.auth.models import User
 from django.contrib.auth.mixins import UserPassesTestMixin
 # from django.contrib.auth import get_user_model
 from currency.models import Rate, ContactUs, Source
-from django.core.mail import send_mail
+# from django.core.mail import send_mail
 from django.urls import reverse_lazy
 from currency.forms import RateForm, SourceForm, ContactUsForm
 from django.views.generic import (
@@ -66,8 +66,8 @@ class ContactUsCreateView(CreateView):
     #     return response
 
     def _send_email(self):
-        from django.conf import settings
-        recipient = settings.DEFAULT_FROM_EMAIL
+        # from django.conf import settings
+        # recipient = settings.DEFAULT_FROM_EMAIL
         subject = 'User contact us'
         body = f'''
                 Name: {self.object.name}

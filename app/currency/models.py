@@ -17,7 +17,7 @@ class Rate(models.Model):
     source = models.ForeignKey('currency.Source', on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.buy} - {self.sell} - {self.source}'
+        return f'{self.buy} - {self.sell}'
 
 
 def logo_directory_path(instance, filename):
@@ -30,6 +30,7 @@ class Source(models.Model):
     name = models.CharField(_('Name'), max_length=64)
     created = models.DateTimeField(_('Created'), auto_now_add=True)
     logo = models.FileField(_('Logo'), default=None, null=True, blank=True, upload_to=logo_directory_path)
+    code_name = models.CharField(_('Code name'), max_length=64, unique=True)
 
     class Meta:
         verbose_name = _('Source')

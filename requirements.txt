@@ -6,6 +6,8 @@ django-admin-rangefilter
 django-import-export
 django-storages
 django-crispy-forms
+Celery
+requests
 
 #flake8
 flake8

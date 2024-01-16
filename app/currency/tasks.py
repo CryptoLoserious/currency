@@ -66,6 +66,10 @@ def parse_monobank():
         buy_key = 'rateBuy'
         sell_key = 'rateSell'
         currency_key = 'currencyCodeA'
+        currency_key_2 = 'currencyCodeB'
+
+        if rate.get(currency_key_2) != 980:
+            continue
 
         if buy_key not in rate or sell_key not in rate or currency_key not in rate:
             continue

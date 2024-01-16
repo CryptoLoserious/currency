@@ -7,6 +7,7 @@ django-import-export
 django-storages
 django-crispy-forms
 Celery
+django-filter
 requests
 
 #flake8

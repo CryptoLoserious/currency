@@ -6,6 +6,11 @@ django-admin-rangefilter
 django-import-export
 django-storages
 django-crispy-forms
+djangorestframework
+djangorestframework-xml
+djangorestframework-yaml
+djangorestframework-simplejwt
+drf-yasg
 Celery
 django-filter
 requests

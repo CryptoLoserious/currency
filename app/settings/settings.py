@@ -143,7 +143,7 @@ REST_FRAMEWORK = {
         'rate': '10/min'
     },
     'DEFAULT_THROTTLE_CONTACTUS': {
-        'contactus': '10/min'
+        'contactus': '10/min',
     },
     'DEFAULT_THROTTLE_SOURCE': {
         'source': '10/min'
@@ -212,7 +212,7 @@ DEFAULT_FROM_EMAIL = 'wisp777test@gmail.com'
 # EMAIL_USE_SSL = False
 # EMAIL_PORT = 587  # http - 80, https - 443
 # EMAIL_HOST_USER = 'wisp777test@gmail.com'
-# EMAIL_HOST_PASSWORD = '***********'
+# EMAIL_HOST_PASSWORD = 'zwvbqobiwhvhmksuab'
 
 
 # from django.core.mail import send_mail

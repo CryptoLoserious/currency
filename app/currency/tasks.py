@@ -27,8 +27,8 @@ def parse_privatbank():
     }
 
     for rate in rates:
-        buy = to_2_places_decimal(rate['buy'])
-        sell = to_2_places_decimal(rate['sale'])
+        buy = to_2_places_decimal(str(rate['buy']))
+        sell = to_2_places_decimal(str(rate['sale']))
         currency_type = rate['ccy']
 
         if currency_type not in available_currency_type:
@@ -70,7 +70,6 @@ def parse_monobank():
 
         if rate.get(currency_key_2) != 980:
             continue
-
         if buy_key not in rate or sell_key not in rate or currency_key not in rate:
             continue
 

@@ -99,17 +99,18 @@ class ContactUsCreateView(CreateView):
                 '''
         # eta = datetime.now() + timedelta(seconds=60)
 
-        send_email_in_background.apply_async(
-            kwargs={
+        send_email_in_background(
+            **{
                 'subject': subject,
                 'body': body
-            },
+            }
         )
 
     def form_valid(self, form):
         redirect = super().form_valid(form)
 
         self._send_email()
+        # breakpoint()
 
         return redirect
 

@@ -20,3 +20,9 @@ flake8
 flake8-builtins
 flake8-print
 flake8-breakpoint
+
+#pytest
+pytest
+pytest-django
+pytest-cov
+pytest-mock

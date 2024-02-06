@@ -1,0 +1,35 @@
+[
+  {
+    "model": "currency.source",
+    "pk": 1,
+    "fields": {
+      "source_url": "monobank.com.ua",
+      "name": "MonoBank",
+      "created": "2024-01-20T19:32:39.366Z",
+      "logo": "logo/source_1/MonoBank_logo.jpeg",
+      "code_name": "mono"
+    }
+  },
+  {
+    "model": "currency.source",
+    "pk": 2,
+    "fields": {
+      "source_url": "testurl.com.ua",
+      "name": "Dummy Source",
+      "created": "2024-01-20T19:37:16.981Z",
+      "logo": "",
+      "code_name": "dummy"
+    }
+  },
+  {
+    "model": "currency.source",
+    "pk": 3,
+    "fields": {
+      "source_url": "privatbank.com.ua",
+      "name": "PrivatBank",
+      "created": "2024-01-25T15:31:16.092Z",
+      "logo": "logo/source_3/privatBank_logo.png",
+      "code_name": ""
+    }
+  }
+]
